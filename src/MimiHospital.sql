@@ -360,7 +360,12 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 SELECT * FROM HospitalPerson;
 
-
+--Insert values into Resident
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2012-09-12","4","5312","0123");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2013-03-20","6","7492","2384");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2015-11-12","12","5733","9433");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2016-06-25","10","8342","3948");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2002-12-12","15","7219","2091");
 
 
 --DROP FOR DEBUG PURPOSES
