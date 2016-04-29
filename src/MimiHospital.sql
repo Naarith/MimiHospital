@@ -409,6 +409,10 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","181-784-8832","2016-01-01");
 
 
+-- Insert values for technician
+INSERT INTO `Technician` (`personID`) VALUES ("5790");
+INSERT INTO `Technician` (`personID`) VALUES ("4800");
+INSERT INTO `Technician` (`personID`) VALUES ("4092");
 
 SELECT * FROM HospitalPerson;
 
