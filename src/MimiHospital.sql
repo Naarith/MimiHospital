@@ -375,6 +375,22 @@ INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2012-09-11",
 
 
 
+--################
+--INSERTING VALUES INTO PHYSICIAN (21-30)
+
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("345-346-3463","1495");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("453-634-6363","1163" );
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("235-356-5474","2783");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("457-457-6558","3830");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("432-754-2765","7382");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("234-546-8468","1940");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("234-865-4564","1118");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("275-852-5485","4351");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("346-875-2745","2672");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("857-458-2474","9947");
+
+
+
 SELECT * FROM HospitalPerson;
 
 
