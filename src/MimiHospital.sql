@@ -361,16 +361,16 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 --################
 --INSERTING VALUES INTO PHYSICIAN (21-30)
 
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Kirestin","Blossom","P.O. Box 165, 4506 Pellentesque St.","1495");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Evangeline","Prescott","3575 Malesuada St.","1163");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Tanisha","Sybil","134-6137 Elit Rd.","2783");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Azalia","Quyn","Ap #275-5476 Ut, St.","3830");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Vera","Shannon","3066 Nisi St.","7382");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Marshall","Dana","1254 Eu Av.","1940");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Uriel","Anastasia","Ap #472-2681 Sem Rd.","1118");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Hiram","Yeo","Ap #172-3126 Nunc St.","4351");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Timon","Elizabeth","5355 Sit Rd.","2672");
-INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("Merrill","Jin","260-3863 Nullam Avenue","9947");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("345-346-3463","1495");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("453-634-6363","1163" );
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("235-356-5474","2783");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("457-457-6558","3830");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("432-754-2765","7382");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("234-546-8468","1940");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("234-865-4564","1118");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("275-852-5485","4351");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("346-875-2745","2672");
+INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("857-458-2474","9947");
 
 
 
