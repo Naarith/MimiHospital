@@ -6,30 +6,39 @@ CREATE TABLE HospitalPerson(
     firstName VARCHAR(40),
     lastName VARCHAR(40),
     address VARCHAR(40),
-    phone VARCHAR(10), -- needs to be a subkey later
     personID INT NOT NULL, --NOT NULL not necessarily needed but makes it clear what the pk is
     CONSTRAINT person_pk -- don't need CONSTRAINT, it is implied when using PRIMARY KEY
     PRIMARY KEY(personID) -- primary keys are always indexed in mySQL
+);
+
+CREATE TABLE PersonPhone(
+    phoneType   VARCHAR(10), 
+    phoneNum    CHAR(10) NOT NULL,
+    personID    INT NOT NULL,
+    FOREIGN KEY(personID)
+    REFERENCES HospitalPerson(personID),
+
+    PRIMARY KEY(phoneNum, personID, phoneType)
 );
 
 --subclasses must have the same pk as the parent
 CREATE TABLE Employee(
     hiredDate TIMESTAMP,
     vacaTime INT,
-    employeeID INT NOT NULL,
     personID INT NOT NULL, --parent pk needs to be a part of the child subclass
     -- constraint is implied for foreign key as well, if no constraint var is given, mySQL will generate one for you
     CONSTRAINT employee_fk 
     FOREIGN KEY (personID)
     REFERENCES HospitalPerson(personID), 
 
-    PRIMARY KEY(employeeID, personID)
+    PRIMARY KEY(personID)
 );
 
 CREATE TABLE Volunteer(
     personID INT NOT NULL,
     CONSTRAINT volunteer_fk
-    FOREIGN KEY person_pk(personID) REFERENCES HospitalPerson(personID),
+    FOREIGN KEY(personID) 
+    REFERENCES HospitalPerson(personID),
 
     PRIMARY KEY(personID)
 );
@@ -81,55 +90,227 @@ CREATE TABLE PhysicianSpecialty(
     PRIMARY KEY(pagerNum, specialtyName)
 );
 
+CREATE TABLE Nurse(
+    certificate VARCHAR(40) NOT NULL,
+    personID    INT NOT NULL,
+
+    CONSTRAINT nurse_fk
+    FOREIGN KEY(personID)
+    REFERENCES Employee(personID),
+
+    CONSTRAINT nurse_pk
+    PRIMARY KEY(personID)
+);
+
+CREATE TABLE Timecard(
+    date        DATE NOT NULL,
+    hrsWorked   INT,
+    personID    INT NOT NULL,
+
+    CONSTRAINT timecard_fk
+    FOREIGN KEY(personID)
+    REFERENCES Nurse(personID),
+
+    CONSTRAINT timecard_pk
+    PRIMARY KEY(personID, date)
+);
+
+CREATE TABLE RN(
+    personID        INT NOT NULL,
+    licenseLoc      VARCHAR(40),
+    dateReceived    DATE,
+
+    CONSTRAINT rn_fk
+    FOREIGN KEY(personID)
+    REFERENCES Nurse(personID),
+
+    CONSTRAINT rn_pk
+    PRIMARY KEY(personID)
+);
+
+CREATE TABLE CareCenter(
+    location        VARCHAR(40) NOT NULL,
+    name            VARCHAR(40),
+    personID        INT NOT NULL,
+
+    CONSTRAINT carecenter_fk
+    FOREIGN KEY (personID)
+    REFERENCES RN(personID),
+
+    CONSTRAINT carecenter_pk
+    PRIMARY KEY (location, personID)
+);
+
+ALTER TABLE Nurse
+    ADD location VARCHAR(40) NOT NULL,
+    ADD CONSTRAINT
+    FOREIGN KEY(location)
+    REFERENCES CareCenter(location);
+   
+
+ALTER TABLE Nurse
+    DROP location;
+ 
+CREATE TABLE Technician(
+    personID   INT NOT NULL,
+
+    CONSTRAINT technician_fk
+    FOREIGN KEY(personID)
+    REFERENCES Employee(personID),
+
+    CONSTRAINT technician_pk
+    PRIMARY KEY(personID)
+);
+
+CREATE TABLE TechnicianSkill(
+    personID    INT NOT NULL, 
+    skillName   VARCHAR(40) NOT NULL,
+
+    CONSTRAINT techPers_fk
+    FOREIGN KEY(personID)
+    REFERENCES Technician(personID),
+    
+    CONSTRAINT techskill_fk
+    FOREIGN KEY(skillName)
+    REFERENCES Skill(skillName),
+
+    CONSTRAINT techSkill_pk
+    PRIMARY KEY(personID, skillName)
+);
+
+CREATE TABLE Lab(
+    name        VARCHAR(40),
+    location        VARCHAR(40) NOT NULL,
+    PRIMARY KEY(location)
+);
+
+CREATE TABLE TechLab(
+    location        VARCHAR(10) NOT NULL,
+    personID    INT NOT NULL,
+
+    CONSTRAINT techLabPerson_fk
+    FOREIGN KEY(personID)
+    REFERENCES Technician(personID),
+    
+    CONSTRAINT techLabRoom_fk
+    FOREIGN KEY(location)
+    REFERENCES Lab(location),
+
+    CONSTRAINT techLab_pk
+    PRIMARY KEY(personID, location)
+);   
+
+CREATE TABLE Staff(
+    personID   INT NOT NULL,
+
+    CONSTRAINT staff_fk
+    FOREIGN KEY(personID)
+    REFERENCES Employee(personID),
+
+    CONSTRAINT staff_pk
+    PRIMARY KEY(personID)
+);
+
 CREATE TABLE Patient(
-    ID          VARCHAR(40) NOT NULL,
+    ID          INT NOT NULL,
     personID    INT NOT NULL,
     contactDate	DATE,
+
+    FOREIGN KEY(
     FOREIGN KEY (personID)
     REFERENCES HospitalPerson(personID),
     
-    PRIMARY KEY(ID)
+    CONSTRAINT patient_pk
+    PRIMARY KEY(ID, personID)
 );
--- 
--- 
--- CREATE TABLE resident(
---   admittedDate	DATE,
---   lengthStayed	VARCHAR(40), -- can use check() to make sure lengthstayed is within a given range?
---   CONSTRAINT fk_constraint
---   FOREIGN KEY fk_personID(personID)
---   REFERENCES patient (personID)
--- );
--- 
--- CREATE TABLE outpatient(
---   CONSTRAINT fk_outpatient
---   FOREIGN KEY pk_patient(personID)
---   REFERENCES patient (personID)-- make pk
--- );
--- 
--- CREATE TABLE bed(
---   bedNum	VARCHAR(20),
---   roomNum	VARCHAR(20)
--- );
--- 
--- CREATE TABLE visit(
---   date    VARCHAR(40) NOT NULL,	-- DATE DATA TYPE
---   comment VARCHAR(40)         ,
---   visitHrs   VARCHAR(40)         ,   
---   CONSTRAINT recordingStudio PRIMARY KEY (stName)
--- );
+
+
+CREATE TABLE Resident(
+    admittedDate	DATE,
+    lengthStayed	VARCHAR(40), -- can use check() to make sure lengthstayed is within a given range?
+    personID            INT NOT NULL,
+
+    CONSTRAINT resident_fk
+    FOREIGN KEY residentPatient_fk(personID)
+    REFERENCES Patient(personID),
+
+    CONSTRAINT resident_pk
+    PRIMARY KEY (personID)
+);
+
+CREATE TABLE Outpatient(
+    personID        INT NOT NULL,
+    ID              VARCHAR(40) NOT NULL,
+    
+    CONSTRAINT outpatient_fk
+    FOREIGN KEY (personID)
+    REFERENCES Patient(personID),
+
+    CONSTRAINT outpatientPatient_fk
+    FOREIGN KEY(ID)
+    REFERENCES Patient(ID),
+
+    CONSTRAINT outpatient_pk
+    PRIMARY KEY (personID, ID)
+);
+
+CREATE TABLE Bed(
+    bedNum          VARCHAR(20),
+    roomNum         VARCHAR(20),
+    bedID           INT,
+    carecenterID    INT, 
+
+    CONSTRAINT bedCenter_fk
+    FOREIGN KEY (carecenterID)
+    REFERENCES CareCenter(carecenterID),
+    
+    CONSTRAINT bed_pk
+    PRIMARY KEY (bedID)
+);
+
+CREATE TABLE Visit(
+    date    VARCHAR(40) NOT NULL,	-- DATE DATA TYPE
+    comment VARCHAR(40)         ,
+    visitHrs   VARCHAR(40),   
+    CONSTRAINT recordingStudio 
+    PRIMARY KEY (stName)
+);
+
+
+
 
 SELECT * FROM HospitalPerson;
 
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
+DROP TABLE PersonPhone;
 
 DROP TABLE Employee;
 
+DROP TABLE Nurse;
+DROP TABLE RN;
+DROP TABLE Timecard;
+
 DROP TABLE Volunteer;
-DROP TABLE VolunteerSkill;
 DROP TABLE Skill;
+DROP TABLE VolunteerSkill;
 
 DROP TABLE Physician;
-DROP TABLE PhysicianSpecialty;
 DROP TABLE Specialty;
+DROP TABLE PhysicianSpecialty;
+
+DROP TABLE Patient;
+DROP TABLE Resident;
+DROP TABLE Outpatient;
+
+DROP TABLE Technician;
+DROP TABLE Lab;
+DROP TABLE TechLab;
+
+DROP TABLE Staff;
+
+DROP TABLE CareCenter;
+DROP TABLE Bed;
+
+DROP TABLE Visit;
