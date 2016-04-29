@@ -3,16 +3,16 @@ use cecs323m39; --switch to database, must call this before being able to add to
 show tables; --show all tables in current database
 
 CREATE TABLE HospitalPerson(
-    firstName VARCHAR(40),
-    lastName VARCHAR(40),
-    address VARCHAR(40),
-    personID INT NOT NULL, --NOT NULL not necessarily needed but makes it clear what the pk is
+    firstName   VARCHAR(40),
+    lastName    VARCHAR(40),
+    address     VARCHAR(40),
+    personID    INT NOT NULL, --NOT NULL not necessarily needed but makes it clear what the pk is
     CONSTRAINT person_pk -- don't need CONSTRAINT, it is implied when using PRIMARY KEY
     PRIMARY KEY(personID) -- primary keys are always indexed in mySQL
 );
 
 CREATE TABLE PersonPhone(
-    phoneType   VARCHAR(10), 
+    phoneType   VARCHAR(10) NOT NULL, 
     phoneNum    CHAR(10) NOT NULL,
     personID    INT NOT NULL,
 
@@ -90,7 +90,6 @@ CREATE TABLE PhysicianSpecialty(
 
     PRIMARY KEY(pagerNum, specialtyName)
 );
-DROP TABLE Physician;
 
 CREATE TABLE Nurse(
     certificate VARCHAR(40) NOT NULL,
@@ -145,14 +144,10 @@ CREATE TABLE CareCenter(
 
 ALTER TABLE Nurse
     ADD location VARCHAR(40) NOT NULL,
-    ADD CONSTRAINT
+    ADD CONSTRAINT nurseLoc_fk
     FOREIGN KEY(location)
     REFERENCES CareCenter(location);
-   
 
-ALTER TABLE Nurse
-    DROP location;
- 
 CREATE TABLE Technician(
     personID   INT NOT NULL,
 
@@ -302,6 +297,12 @@ DROP TABLE Nurse;
 DROP TABLE RN;
 DROP TABLE Timecard;
 DROP TABLE CareCenter;
+-- have to drop the foreign key before being able to drop RN and Nurse
+ALTER TABLE Nurse
+    DROP FOREIGN KEY nurseLoc_fk;
+ALTER TABLE Nurse
+    DROP location;
+ 
 
 DROP TABLE Volunteer;
 DROP TABLE Skill;
@@ -318,6 +319,7 @@ DROP TABLE Outpatient;
 DROP TABLE Bed;
 
 DROP TABLE Technician;
+DROP TABLE TechnicianSkill;
 DROP TABLE Lab;
 DROP TABLE TechLab;
 
