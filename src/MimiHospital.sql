@@ -440,6 +440,14 @@ INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790",
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
 
+--#####################
+--Insert values into Outpatient
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9894","3485");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("2607","6094");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9723","1039");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
+
 SELECT * FROM HospitalPerson;
 
 
