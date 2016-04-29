@@ -391,6 +391,21 @@ INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("857-458-2474","9947");
 
 
 
+--#####################
+--INSERTING VALUES FOR Patient
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("0123","5312","831-424-2934","2016-04-29");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2384","7492","562-532-5677","2015-03-22");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("9433","5733","909-345-2452","2012-06-19");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("3948","8342","562-552-3345","2016-01-16");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2091","7219","831-236-6092","2015-12-25");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("3485","9894","123-678-9803","2016-04-20");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("6094","2607","143-523-3117","2016-04-01");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1039","9723","234-678-9633","2015-10-01");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920","6847","813-516-1747","2015-12-31");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","181-784-8832","2016-01-01");
+
+
+
 SELECT * FROM HospitalPerson;
 
 
