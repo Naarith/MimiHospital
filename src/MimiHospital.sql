@@ -360,7 +360,11 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 SELECT * FROM HospitalPerson;
 
+--Insert values into Lab
 
+INSERT INTO `Lab` (`name`,`location`) VALUES ("TechLab","201");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("BioLab","204");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
 
 
 --DROP FOR DEBUG PURPOSES
