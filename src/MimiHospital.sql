@@ -408,7 +408,8 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985",
 
 SELECT * FROM HospitalPerson;
 
-
+--Insert values into TechLab
+INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
 
 --DROP FOR DEBUG PURPOSES
