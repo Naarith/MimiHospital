@@ -360,6 +360,8 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 SELECT * FROM HospitalPerson;
 
+--Insert values into RN
+INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
 
 
 
