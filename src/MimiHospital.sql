@@ -360,6 +360,10 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 SELECT * FROM HospitalPerson;
 
+--Insert values into Staff
+
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
 
 
 
