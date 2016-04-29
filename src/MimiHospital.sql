@@ -435,7 +435,13 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 --Insert values into TechLab
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
+--#####################
+--Insert values into Staff
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
+
 SELECT * FROM HospitalPerson;
+
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
