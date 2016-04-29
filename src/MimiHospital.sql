@@ -25,7 +25,7 @@ CREATE TABLE PersonPhone(
 
 --subclasses must have the same pk as the parent
 CREATE TABLE Employee(
-    hiredDate TIMESTAMP,
+    hiredDate DATE,
     vacaTime INT,
     personID INT NOT NULL, --parent pk needs to be a part of the child subclass
     -- constraint is implied for foreign key as well, if no constraint var is given, mySQL will generate one for you
@@ -290,6 +290,7 @@ CREATE TABLE Visit(
 --BEGIN INSERTING VALUES INTO TABLES
 
 --First 10
+--Inserting values into Employee
 
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Keefe","Bevis","P.O. Box 645, 7391 Taciti St.","5790");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Carolyn","Rashad","9346 Vel Av.","4800");
@@ -301,6 +302,7 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Salvador","Yoshi","261-4878 Neque Ave","6611");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Channing","Leroy","P.O. Box 334, 1030 A St.","3379");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Jenna","Jasper","P.O. Box 184, 5350 Ligula. Road","5111");
+
 
 --11-20
 
@@ -356,6 +358,21 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Uriel","Natalie","4510 Tellus, Road","6726");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Yuli","Rinah","P.O. Box 971, 2158 Malesuada Rd.","7064");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Addison","Gil","591-2874 Libero St.","9792");
+
+--###############
+--Insert into employees
+
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1995-08-30","5","5790");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2000-09-25","1","4800");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2001-12-12","14","4092");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2008-03-30","3","9626");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1999-07-04","11""3572");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1998-01-17","12","2118");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1997-05-21","13","5518");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2006-11-15","6","6611");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2006-11-14","0","3379");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2012-09-11","3","5111");
+
 
 
 SELECT * FROM HospitalPerson;
