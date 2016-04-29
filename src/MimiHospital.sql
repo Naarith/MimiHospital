@@ -450,6 +450,13 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 
 SELECT * FROM HospitalPerson;
 
+--#####################
+--Insert values into Bed
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
