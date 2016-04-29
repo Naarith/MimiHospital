@@ -360,7 +360,8 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 SELECT * FROM HospitalPerson;
 
-
+--Insert values into Bed
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("","","");
 
 
 --DROP FOR DEBUG PURPOSES
