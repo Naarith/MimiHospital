@@ -290,7 +290,7 @@ CREATE TABLE Visit(
 --BEGIN INSERTING VALUES INTO TABLES
 
 --First 10
---Inserting values into Employee
+--Inserting values into HospitalPerson
 
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Keefe","Bevis","P.O. Box 645, 7391 Taciti St.","5790");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Carolyn","Rashad","9346 Vel Av.","4800");
@@ -415,6 +415,13 @@ INSERT INTO `Technician` (`personID`) VALUES ("4800");
 INSERT INTO `Technician` (`personID`) VALUES ("4092");
 
 SELECT * FROM HospitalPerson;
+
+--Insert values into Resident
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2012-09-12","4","5312","0123");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2013-03-20","6","7492","2384");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2015-11-12","12","5733","9433");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2016-06-25","10","8342","3948");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2002-12-12","15","7219","2091");
 
 --Insert values into TechLab
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
