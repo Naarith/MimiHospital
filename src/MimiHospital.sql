@@ -361,7 +361,7 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 SELECT * FROM HospitalPerson;
 
 --Insert values into CareCenter
-INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("145","Happy CareCenter","2118");
+INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
 
 
 --DROP FOR DEBUG PURPOSES
