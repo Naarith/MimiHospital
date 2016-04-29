@@ -15,6 +15,7 @@ CREATE TABLE PersonPhone(
     phoneType   VARCHAR(10), 
     phoneNum    CHAR(10) NOT NULL,
     personID    INT NOT NULL,
+
     FOREIGN KEY(personID)
     REFERENCES HospitalPerson(personID),
 
@@ -64,7 +65,7 @@ CREATE TABLE VolunteerSkill(
 );
 
 CREATE TABLE Physician(
-    pagerNum        INT NOT NULL,
+    pagerNum        VARCHAR(20) NOT NULL,
     personID        INT NOT NULL,
 
     FOREIGN KEY (personID)
@@ -79,7 +80,7 @@ CREATE TABLE Specialty(
 );
 
 CREATE TABLE PhysicianSpecialty(
-    pagerNum        INT NOT NULL,
+    pagerNum        VARCHAR(20) NOT NULL,
     specialtyName   VARCHAR(40) NOT NULL,
     FOREIGN KEY (pagerNum)
     REFERENCES Physician(pagerNum),
@@ -89,6 +90,7 @@ CREATE TABLE PhysicianSpecialty(
 
     PRIMARY KEY(pagerNum, specialtyName)
 );
+DROP TABLE Physician;
 
 CREATE TABLE Nurse(
     certificate VARCHAR(40) NOT NULL,
@@ -214,9 +216,12 @@ CREATE TABLE Staff(
 CREATE TABLE Patient(
     ID          INT NOT NULL,
     personID    INT NOT NULL,
+    pagerNum    VARCHAR(20),
     contactDate	DATE,
 
-    FOREIGN KEY(
+    FOREIGN KEY(pagerNum)
+    REFERENCES Physician(pagerNum),
+
     FOREIGN KEY (personID)
     REFERENCES HospitalPerson(personID),
     
@@ -227,20 +232,21 @@ CREATE TABLE Patient(
 
 CREATE TABLE Resident(
     admittedDate	DATE,
-    lengthStayed	VARCHAR(40), -- can use check() to make sure lengthstayed is within a given range?
+    lengthStayed	INT, -- can use check() to make sure lengthstayed is within a given range?
     personID            INT NOT NULL,
-
+    ID                  INT NOT NULL, 
+    
     CONSTRAINT resident_fk
-    FOREIGN KEY residentPatient_fk(personID)
+    FOREIGN KEY(personID)
     REFERENCES Patient(personID),
 
     CONSTRAINT resident_pk
-    PRIMARY KEY (personID)
+    PRIMARY KEY (personID, ID)
 );
 
 CREATE TABLE Outpatient(
     personID        INT NOT NULL,
-    ID              VARCHAR(40) NOT NULL,
+    ID              INT NOT NULL,
     
     CONSTRAINT outpatient_fk
     FOREIGN KEY (personID)
@@ -255,25 +261,29 @@ CREATE TABLE Outpatient(
 );
 
 CREATE TABLE Bed(
-    bedNum          VARCHAR(20),
-    roomNum         VARCHAR(20),
-    bedID           INT,
-    carecenterID    INT, 
-
+    bedNum          VARCHAR(20) NOT NULL,
+    roomNum         VARCHAR(20) NOT NULL,
+    location        VARCHAR(10) NOT NULL,      
     CONSTRAINT bedCenter_fk
-    FOREIGN KEY (carecenterID)
-    REFERENCES CareCenter(carecenterID),
+    FOREIGN KEY (location)
+    REFERENCES CareCenter(location),
     
     CONSTRAINT bed_pk
-    PRIMARY KEY (bedID)
+    PRIMARY KEY (bedNum, roomNum, location)
 );
 
 CREATE TABLE Visit(
-    date    VARCHAR(40) NOT NULL,	-- DATE DATA TYPE
-    comment VARCHAR(40)         ,
-    visitHrs   VARCHAR(40),   
-    CONSTRAINT recordingStudio 
-    PRIMARY KEY (stName)
+    date        DATE NOT NULL,
+    comment     VARCHAR(140),
+    visitHrs    VARCHAR(40),
+    pagerNum    VARCHAR(20) NOT NULL,
+
+    CONSTRAINT visit_fk
+    FOREIGN KEY(pagerNum)
+    REFERENCES Physician(pagerNum),
+
+    CONSTRAINT visit_pk
+    PRIMARY KEY (pagerNum, visitHrs)
 );
 
 
@@ -291,6 +301,7 @@ DROP TABLE Employee;
 DROP TABLE Nurse;
 DROP TABLE RN;
 DROP TABLE Timecard;
+DROP TABLE CareCenter;
 
 DROP TABLE Volunteer;
 DROP TABLE Skill;
@@ -299,18 +310,15 @@ DROP TABLE VolunteerSkill;
 DROP TABLE Physician;
 DROP TABLE Specialty;
 DROP TABLE PhysicianSpecialty;
+DROP TABLE Visit;
 
 DROP TABLE Patient;
 DROP TABLE Resident;
 DROP TABLE Outpatient;
+DROP TABLE Bed;
 
 DROP TABLE Technician;
 DROP TABLE Lab;
 DROP TABLE TechLab;
 
 DROP TABLE Staff;
-
-DROP TABLE CareCenter;
-DROP TABLE Bed;
-
-DROP TABLE Visit;
