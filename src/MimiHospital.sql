@@ -389,7 +389,11 @@ INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("275-852-5485","4351");
 INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("346-875-2745","2672");
 INSERT INTO `Physician` ('pagerNum',`personID`) VALUES ("857-458-2474","9947");
 
+--Insert values into Lab
 
+INSERT INTO `Lab` (`name`,`location`) VALUES ("TechLab","201");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("BioLab","204");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
 
 --#####################
 --INSERTING VALUES FOR Patient
