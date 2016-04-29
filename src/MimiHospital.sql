@@ -389,6 +389,7 @@ INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("275-852-5485","4351");
 INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("346-875-2745","2672");
 INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("857-458-2474","9947");
 
+--#####################
 --Insert values into Lab
 
 INSERT INTO `Lab` (`name`,`location`) VALUES ("TechLab","201");
@@ -408,14 +409,21 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1039",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920","6847","813-516-1747","2015-12-31");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","181-784-8832","2016-01-01");
 
-
+--#####################
 -- Insert values for technician
 INSERT INTO `Technician` (`personID`) VALUES ("5790");
 INSERT INTO `Technician` (`personID`) VALUES ("4800");
 INSERT INTO `Technician` (`personID`) VALUES ("4092");
 
-SELECT * FROM HospitalPerson;
+--Instert Values into Visit
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm","345-346-3463");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-14","Happy Valentines day!","6:00pm-8:00pm","453-634-6363");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-12-25","Sad Christmas day for her.","8:00am-10:00am","235-356-5474");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-01-11","Leg still fractured badly.","10:00am-11:00am","457-457-6558");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-20","Hand still badly burned.","4:00pm-5:00pm","432-754-2765");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-21","Fixed dislocated shoulder.","8:00am-11:00am","234-546-8468");
 
+--#####################
 --Insert values into Resident
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2012-09-12","4","5312","0123");
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2013-03-20","6","7492","2384");
@@ -423,9 +431,11 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2016-06-25","10","8342","3948");
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2002-12-12","15","7219","2091");
 
+--#####################
 --Insert values into TechLab
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
+SELECT * FROM HospitalPerson;
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
