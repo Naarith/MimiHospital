@@ -498,6 +498,14 @@ SELECT * FROM HospitalPerson;
 --Insert values into CareCenter
 INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
 
+--Insert values into TimeCard
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","2118");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-21","60","5518");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-17","50","6611");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-03-24","50","3379");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","5111");
+
+
 --#####################
 --Insert values into Bed
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
