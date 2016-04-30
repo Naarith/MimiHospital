@@ -325,13 +325,13 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 --####
 --####
---#### inserting values into Volunteer 
-INSERT INTO Volunteer (`personID`) 
-    VALUES  (6401), 
-            (4503), 
+--#### inserting values into Volunteer
+INSERT INTO Volunteer (`personID`)
+    VALUES  (6401),
+            (4503),
             (4142),
             (2138),
-            (1968), 
+            (1968),
             (1139),
             (7471),
             (1236),
@@ -495,12 +495,17 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 SELECT * FROM HospitalPerson;
 
 --#####################
+--Insert values into CareCenter
+INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
+
+--#####################
 --Insert values into Bed
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
+>>>>>>> master
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
