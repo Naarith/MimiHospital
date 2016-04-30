@@ -38,10 +38,12 @@ CREATE TABLE Employee(
 
 CREATE TABLE Volunteer(
     personID INT NOT NULL,
+
     CONSTRAINT volunteer_fk
     FOREIGN KEY(personID)
     REFERENCES HospitalPerson(personID),
 
+    CONSTRAINT volunteer_pk
     PRIMARY KEY(personID)
 );
 
@@ -184,7 +186,8 @@ CREATE TABLE Lab(
 
 CREATE TABLE TechLab(
     location        VARCHAR(10) NOT NULL,
-    personID    INT NOT NULL,
+    personID        INT NOT NULL,
+    startDate       DATE,
 
     CONSTRAINT techLabPerson_fk
     FOREIGN KEY(personID)
@@ -200,6 +203,7 @@ CREATE TABLE TechLab(
 
 CREATE TABLE Staff(
     personID   INT NOT NULL,
+    jobClass    VARCHAR(50),
 
     CONSTRAINT staff_fk
     FOREIGN KEY(personID)
@@ -260,13 +264,15 @@ CREATE TABLE Bed(
     bedNum          VARCHAR(20) NOT NULL,
     roomNum         VARCHAR(20) NOT NULL,
     location        VARCHAR(10) NOT NULL,
+    bedID           INT NOT NULL,
     CONSTRAINT bedCenter_fk
     FOREIGN KEY (location)
     REFERENCES CareCenter(location),
 
     CONSTRAINT bed_pk
-    PRIMARY KEY (bedNum, roomNum, location)
+    PRIMARY KEY (bedNum, roomNum, location, bedID)
 );
+
 
 CREATE TABLE Visit(
     date        DATE NOT NULL,
@@ -316,6 +322,44 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Katell","Sara","P.O. Box 453, 7928 Scelerisque Rd.","1236");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Shannon","Vivian","Ap #979-8877 Adipiscing, St.","1778");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Noah","Dylan","8796 Quis Rd.","9968");
+
+--####
+--####
+--#### inserting values into Volunteer
+INSERT INTO Volunteer (`personID`)
+    VALUES  (6401),
+            (4503),
+            (4142),
+            (2138),
+            (1968),
+            (1139),
+            (7471),
+            (1236),
+            (1778),
+            (9968);
+
+--####
+-- INSERTING VALUE INTO SKILL TABLE
+--####
+INSERT INTO Skill (`skillName`)
+    VALUES ('Timeliness'),
+        ('Leadership'),
+        ('Organized'),
+        ('Flexible');
+
+--####
+--INSERTING INTO ASSOCIATION VOLUNTEERSKILL TABLE
+--###
+INSERT INTO VolunteerSkill (`personID`, `skillName`)
+    VALUES (6401, 'Timeliness'),
+    (6401, 'Organized'),
+    (4503, 'Leadership'),
+    (4142, 'Timeliness'),
+    (2138, 'Flexible'),
+    (1968, 'Leadership'),
+    (1139, 'Organized'),
+    (7471, 'Flexible'),
+    (1236, 'Timeliness'); -- person 1778, 9968 don't have any skills ):
 
 
 --21-30
@@ -436,6 +480,7 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
 --#####################
+
 --Insert values into Nurse
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("RN","2118");
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5518");
@@ -443,8 +488,41 @@ INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","6611");
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","3379");
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5111");
 
+--Insert values into Staff
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
+INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
+
+--#####################
+--Insert values into Outpatient
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9894","3485");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("2607","6094");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9723","1039");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
+INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
+>>>>>>> master
 
 SELECT * FROM HospitalPerson;
+
+--#####################
+--Insert values into CareCenter
+INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
+
+--Insert values into TimeCard
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","2118");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-21","60","5518");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-17","50","6611");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-03-24","50","3379");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","5111");
+
+
+--#####################
+--Insert values into Bed
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
+>>>>>>> master
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
