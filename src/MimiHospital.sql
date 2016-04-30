@@ -410,7 +410,7 @@ INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1995-08-30",
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2000-09-25","1","4800");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2001-12-12","14","4092");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2008-03-30","3","9626");
-INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1999-07-04","11""3572");
+INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1999-07-04","11","3572");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1998-01-17","12","2118");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("1997-05-21","13","5518");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2006-11-15","6","6611");
