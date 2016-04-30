@@ -145,12 +145,6 @@ CREATE TABLE CareCenter(
     PRIMARY KEY (location, personID)
 );
 
-ALTER TABLE Nurse
-    ADD location VARCHAR(40) NOT NULL,
-    ADD CONSTRAINT nurseLoc_fk
-    FOREIGN KEY(location)
-    REFERENCES CareCenter(location);
-
 CREATE TABLE Technician(
     personID   INT NOT NULL,
 
@@ -479,6 +473,13 @@ INSERT INTO `Technician` (`personID`) VALUES ("5790");
 INSERT INTO `Technician` (`personID`) VALUES ("4800");
 INSERT INTO `Technician` (`personID`) VALUES ("4092");
 
+INSERT INTO TechnicianSkill (`personID`, `skillName`)
+    VALUES ("5790", 'Leadership'),
+           ("4800", 'Organized'),
+           ("4092", 'Flexible'),
+           ("5790", 'Flexible'),
+           ("4800", 'Timeliness');
+
 --#####################
 --Instert Values into Visit
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm","345-346-3463");
@@ -527,6 +528,23 @@ INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanfo
 --#####################
 --Insert values into CareCenter
 INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
+
+
+--##########
+--PROBLEM HERE.
+ALTER TABLE Nurse
+    ADD location VARCHAR(40) NOT NULL;
+
+UPDATE Nurse SET location = "West Wing" WHERE personID = "2118";
+UPDATE Nurse SET location = "West Wing" where personID = "5518";
+UPDATE Nurse SET location = "West Wing" where personID = "6611";
+UPDATE Nurse SET location = "West Wing" where personID = "3379";
+UPDATE Nurse SET location = "West Wing" where personID = "5511";
+
+ALTER TABLE Nurse
+    ADD CONSTRAINT nurseLoc_fk
+    FOREIGN KEY(location)
+    REFERENCES CareCenter(location);
 
 --#####################
 --Insert values into TimeCard
