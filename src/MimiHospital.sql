@@ -417,8 +417,6 @@ INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2006-11-15",
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2006-11-14","0","3379");
 INSERT INTO `Employee` (`hiredDate`,`vacaTime`,`personID`) VALUES ("2012-09-11","3","5111");
 
-
-
 --################
 --INSERTING VALUES INTO PHYSICIAN (21-30)
 
@@ -459,6 +457,7 @@ INSERT INTO `Technician` (`personID`) VALUES ("5790");
 INSERT INTO `Technician` (`personID`) VALUES ("4800");
 INSERT INTO `Technician` (`personID`) VALUES ("4092");
 
+--#####################
 --Instert Values into Visit
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm","345-346-3463");
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-14","Happy Valentines day!","6:00pm-8:00pm","453-634-6363");
@@ -480,7 +479,6 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
 --#####################
-
 --Insert values into Nurse
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("RN","2118");
 INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5518");
@@ -499,10 +497,8 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("2607","6094");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9723","1039");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
->>>>>>> master
 
-SELECT * FROM HospitalPerson;
-
+--#####################
 --Insert values into RN
 INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
 
@@ -510,6 +506,7 @@ INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanfo
 --Insert values into CareCenter
 INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
 
+--#####################
 --Insert values into TimeCard
 INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","2118");
 INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-21","60","5518");
@@ -525,8 +522,8 @@ INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
->>>>>>> master
->>>>>>> master
+
+SELECT * FROM HospitalPerson;
 
 --DROP FOR DEBUG PURPOSES
 DROP TABLE HospitalPerson;
