@@ -480,6 +480,14 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
 --#####################
+
+--Insert values into Nurse
+INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("RN","2118");
+INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5518");
+INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","6611");
+INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","3379");
+INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5111");
+
 --Insert values into Staff
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
@@ -491,6 +499,7 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("2607","6094");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9723","1039");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
+>>>>>>> master
 
 SELECT * FROM HospitalPerson;
 
