@@ -494,6 +494,9 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 
 SELECT * FROM HospitalPerson;
 
+--Insert values into RN
+INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
+
 --#####################
 --Insert values into CareCenter
 INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
@@ -513,6 +516,7 @@ INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
 INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
+>>>>>>> master
 >>>>>>> master
 
 --DROP FOR DEBUG PURPOSES
