@@ -325,13 +325,13 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 
 --####
 --####
---#### inserting values into Volunteer 
-INSERT INTO Volunteer (`personID`) 
-    VALUES  (6401), 
-            (4503), 
+--#### inserting values into Volunteer
+INSERT INTO Volunteer (`personID`)
+    VALUES  (6401),
+            (4503),
             (4142),
             (2138),
-            (1968), 
+            (1968),
             (1139),
             (7471),
             (1236),
@@ -493,6 +493,14 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
 INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 
 SELECT * FROM HospitalPerson;
+
+--#####################
+--Insert values into TimeCard
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","2118");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-21","60","5518");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-17","50","6611");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-03-24","50","3379");
+INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40","5111");
 
 --#####################
 --Insert values into Bed
