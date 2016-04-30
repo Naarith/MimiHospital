@@ -431,6 +431,28 @@ INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("275-852-5485","4351");
 INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("346-875-2745","2672");
 INSERT INTO `Physician` (`pagerNum`,`personID`) VALUES ("857-458-2474","9947");
 
+--########
+--INSERTING VALUES for Specialty
+INSERT INTO Specialty (`specialtyName`)
+    VALUES ("Pediatrics"),
+           ("Neurology"),
+           ("Radiology"),
+           ("Dermatology"),
+           ("Gynecology");
+
+INSERT INTO PhysicianSpecialty (`pagerNum`, `specialtyName`)
+    VALUES ("345-346-3463", "Pediatrics"),
+           ("453-634-6363", "Neurology"),
+           ("235-356-5474", "Radiology"),
+           ("457-457-6558", "Dermatology"),
+           ("432-754-2765", "Dermatology"),
+           ("234-546-8468", "Pediatrics"),
+           ("234-865-4564", "Neurology"),
+           ("275-852-5485", "Gynecology"),
+           ("346-875-2745", "Gynecology"),
+           ("857-458-2474", "Pediatrics");
+                      
+
 --#####################
 --Insert values into Lab
 
