@@ -95,7 +95,7 @@ CREATE TABLE PhysicianSpecialty(
 );
 
 CREATE TABLE Nurse(
-    certificate VARCHAR(40) NOT NULL,
+    certificate VARCHAR(40),
     personID    INT NOT NULL,
 
     CONSTRAINT nurse_fk
@@ -448,13 +448,6 @@ INSERT INTO PhysicianSpecialty (`pagerNum`, `specialtyName`)
                       
 
 --#####################
---Insert values into Lab
-
-INSERT INTO `Lab` (`name`,`location`) VALUES ("TechLab","201");
-INSERT INTO `Lab` (`name`,`location`) VALUES ("BioLab","204");
-INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
-
---#####################
 --INSERTING VALUES FOR Patient
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("0123","5312","345-346-3463","2016-04-29");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2384","7492","453-634-6363","2015-03-22");
@@ -481,6 +474,16 @@ INSERT INTO TechnicianSkill (`personID`, `skillName`)
            ("4800", 'Timeliness');
 
 --#####################
+--Insert values into Lab
+INSERT INTO `Lab` (`name`,`location`) VALUES ("TechLab","201");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("BioLab","204");
+INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
+
+--#####################
+--Insert values into TechLab
+INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
+
+--#####################
 --Instert Values into Visit
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm","345-346-3463");
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-14","Happy Valentines day!","6:00pm-8:00pm","453-634-6363");
@@ -496,10 +499,6 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2015-11-12","12","5733","9433");
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2016-06-25","10","8342","3948");
 INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2002-12-12","15","7219","2091");
-
---#####################
---Insert values into TechLab
-INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
 
 --#####################
 --Insert values into Nurse
@@ -528,18 +527,6 @@ INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanfo
 --#####################
 --Insert values into CareCenter
 INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
-
-
---##########
---PROBLEM HERE.
-ALTER TABLE Nurse
-    ADD location VARCHAR(40) NOT NULL;
-
-UPDATE Nurse SET location = "West Wing" WHERE personID = "2118";
-UPDATE Nurse SET location = "West Wing" where personID = "5518";
-UPDATE Nurse SET location = "West Wing" where personID = "6611";
-UPDATE Nurse SET location = "West Wing" where personID = "3379";
-UPDATE Nurse SET location = "West Wing" where personID = "5511";
 
 ALTER TABLE Nurse
     ADD CONSTRAINT nurseLoc_fk
