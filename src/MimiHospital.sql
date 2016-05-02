@@ -14,7 +14,7 @@ CREATE TABLE HospitalPerson(
 CREATE TABLE PersonPhone(
 
     phoneType   VARCHAR(10) NOT NULL,
-    phoneNum    CHAR(10) NOT NULL,
+    phoneNum    CHAR(20) NOT NULL,
     personID    INT NOT NULL,
 
     FOREIGN KEY(personID)
@@ -132,18 +132,33 @@ CREATE TABLE RN(
     PRIMARY KEY(personID)
 );
 
-CREATE TABLE CareCenter(
-    location        VARCHAR(40) NOT NULL,
-    name            VARCHAR(40),
+CREATE TABLE HeadNurse(
     personID        INT NOT NULL,
+    assigned        BIT,
 
-    CONSTRAINT carecenter_fk
+    CONSTRAINT headNurse_fk
     FOREIGN KEY (personID)
     REFERENCES RN(personID),
 
-    CONSTRAINT carecenter_pk
-    PRIMARY KEY (location, personID)
+    CONSTRAINT headNurse_pk
+    PRIMARY KEY (personID)
 );
+
+CREATE TABLE CareCenter(
+    location        VARCHAR(40) NOT NULL,
+    name            VARCHAR(40),
+
+    CONSTRAINT carecenter_pk
+    PRIMARY KEY (location)
+);
+
+ALTER TABLE Nurse
+    ADD location    VARCHAR(40);
+
+ALTER TABLE Nurse
+    ADD CONSTRAINT nurseCenter_fk
+    FOREIGN KEY(location)
+    REFERENCES CareCenter(location);
 
 CREATE TABLE Technician(
     personID   INT NOT NULL,
@@ -258,13 +273,12 @@ CREATE TABLE Bed(
     bedNum          VARCHAR(20) NOT NULL,
     roomNum         VARCHAR(20) NOT NULL,
     location        VARCHAR(10) NOT NULL,
-    bedID           INT NOT NULL,
     CONSTRAINT bedCenter_fk
     FOREIGN KEY (location)
     REFERENCES CareCenter(location),
 
     CONSTRAINT bed_pk
-    PRIMARY KEY (bedNum, roomNum, location, bedID)
+    PRIMARY KEY (bedNum, roomNum, location)
 );
 
 
@@ -397,6 +411,67 @@ INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUE
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Yuli","Rinah","P.O. Box 971, 2158 Malesuada Rd.","7064");
 INSERT INTO `HospitalPerson` (`firstName`,`lastName`,`address`,`personID`) VALUES ("Addison","Gil","591-2874 Libero St.","9792");
 
+
+--###############
+--Inserting values into PersonPhone
+
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","313-453-4353","5790");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","313-413-3453","5790");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","342-655-4564","4800");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","234-657-3456","4092");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","124-457-4856","9626");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","675-754-7547","3572");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","346-754-8577","2118");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","234-754-3457","5518");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","234-674-7658","6611");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","264-785-8769","3379");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","348-769-5484","5111");
+
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","435-346-3747","6401");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","457-458-5737","4503");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","345-745-8568","4142");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","213-345-6868","2138");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","896-457-2463","1968");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","689-456-2347","1139");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","124-658-5675","7471");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","232-436-5474","1236");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","456-437-3457","1778");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","796-679-3475","9968");
+
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","457-457-2463","1495");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","457-348-5472","1163");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","654-854-8426","2783");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","754-435-7327","3830");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","785-345-8635","7382");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","738-568-3457","1940");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","785-869-0990","1118");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","349-098-0547","4351");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","380-747-5468","2672");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","356-785-8458","9947");
+
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","087-965-3457","5312");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","567-543-8457","7492");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","097-568-5375","5733");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","087-764-6585","8342");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","345-686-8557","7219");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","345-856-8585","9894");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","978-568-5485","2607");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","438-658-8586","9723");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","389-564-3480","6847");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","708-547-4858","4272");
+
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","967-658-5685","9256");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","345-568-8547","6055");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","707-567-5854","1879");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","568-658-6858","8780");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","435-877-3868","7448");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","967-684-5474","7602");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","544-477-4785","4051");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","858-869-4784","6726");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("cell","687-535-5474","7064");
+INSERT INTO `PersonPhone` (`phoneType`,`phoneNum`,`personID`) VALUES ("home","967-686-3895","9792");
+
+
 --###############
 --Insert into employees
 
@@ -502,11 +577,11 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 
 --#####################
 --Insert values into Nurse
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("RN","2118");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5518");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","6611");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","3379");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5111");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","2118", "West Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","5518", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","6611", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","3379", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","5111", "West Wing");
 
 --Insert values into Staff
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
@@ -523,10 +598,17 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 --#####################
 --Insert values into RN
 INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
+INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("5518","Harvard","2011-06-16");
+
+--######
+--Insert values into HeadNurse
+INSERT INTO `HeadNurse`(`personID`, `assigned`) VALUES ("2118", 0);
+INSERT INTO `HeadNurse`(`personID`, `assigned`) VALUES ("5518", 1);
 
 --#####################
 --Insert values into CareCenter
-INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
+INSERT INTO `CareCenter` (`location`,`name`) VALUES ("West Wing","Happy CareCenter");
+INSERT INTO `CareCenter` (`location`,`name`) VALUES ("East Wing","Sad CareCenter");
 
 ALTER TABLE Nurse
     ADD CONSTRAINT nurseLoc_fk
@@ -544,11 +626,11 @@ INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40"
 
 --#####################
 --Insert values into Bed
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("1","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("2","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("3","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("4","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("5","145","West Wing");
 
 SELECT * FROM HospitalPerson;
 
