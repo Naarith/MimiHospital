@@ -1,6 +1,25 @@
 --###################
 --VIEWS SQL FILE
 
+--Views Required
+
+--1. Employees-Hired: This view returns the First Name, Last Name, and Date Hired of all Hospital Employees. 
+
+--2. NursesInCharge: This view returns the name of the Nurse in Charge for each Care Center along with the phone number of the Nurse. 
+
+
+--3. GoodTechnician: This view returns all the Technicians how have at least one skill. 
+
+
+--4. CareCenter-Beds: This view returns the name for each Care Center along with the number of beds that are assigned to patients (occupied beds), the number of beds not assigned to patients (free beds), and the total number of beds. 
+
+
+--5. OutPatientsNotVisited: This view returns all OutPatients who have not been visited by a Physician yet. 
+
+
+--##########################################################
+--##########################################################
+
 --Bed
 CREATE VIEW Bed_View AS SELECT * FROM Bed;
 
