@@ -146,19 +146,19 @@ CREATE TABLE HeadNurse(
 
 CREATE TABLE CareCenter(
     location        VARCHAR(40) NOT NULL,
-    name            VARCHAR(40),
+    centerName      VARCHAR(40) NOT NULL,
+    centerID        VARCHAR(40) NOT NULL,
 
     CONSTRAINT carecenter_pk
-    PRIMARY KEY (location)
+    PRIMARY KEY (centerID)
 );
 
 ALTER TABLE Nurse
-    ADD location    VARCHAR(40);
+    ADD centerID    VARCHAR(40) NOT NULL,
 
-ALTER TABLE Nurse
     ADD CONSTRAINT nurseCenter_fk
-    FOREIGN KEY(location)
-    REFERENCES CareCenter(location);
+    FOREIGN KEY Nurse(centerID)
+    REFERENCES CareCenter(centerID);
 
 CREATE TABLE Technician(
     personID   INT NOT NULL,
@@ -244,10 +244,15 @@ CREATE TABLE Resident(
     lengthStayed	INT, -- can use check() to make sure lengthstayed is within a given range?
     personID            INT NOT NULL,
     ID                  INT NOT NULL,
+    centerID            VARCHAR(40) NOT NULL,
 
     CONSTRAINT resident_fk
     FOREIGN KEY(personID)
     REFERENCES Patient(personID),
+    
+    CONSTRAINT residentcenter_fk
+    FOREIGN KEY(centerID)
+    REFERENCES CareCenter(centerID),
 
     CONSTRAINT resident_pk
     PRIMARY KEY (personID, ID)
@@ -272,13 +277,14 @@ CREATE TABLE Outpatient(
 CREATE TABLE Bed(
     bedNum          VARCHAR(20) NOT NULL,
     roomNum         VARCHAR(20) NOT NULL,
-    location        VARCHAR(10) NOT NULL,
-    CONSTRAINT bedCenter_fk
-    FOREIGN KEY (location)
-    REFERENCES CareCenter(location),
+    centerID        VARCHAR(40) NOT NULL,
 
+    CONSTRAINT bed_fk
+    FOREIGN KEY (centerID)
+    REFERENCES CareCenter(centerID),
+    
     CONSTRAINT bed_pk
-    PRIMARY KEY (bedNum, roomNum, location)
+    PRIMARY KEY (bedNum, roomNum, centerID)
 );
 
 
@@ -534,6 +540,7 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("6094",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1039","9723","275-852-5485","2015-10-01");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920","6847","346-875-2745","2015-12-31");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","857-458-2474","2016-01-01");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1470","6401","857-458-2474","2016-01-01");
 
 --#####################
 -- Insert values for technician
@@ -544,9 +551,9 @@ INSERT INTO `Technician` (`personID`) VALUES ("4092");
 INSERT INTO TechnicianSkill (`personID`, `skillName`)
     VALUES ("5790", 'Leadership'),
            ("4800", 'Organized'),
-           ("4092", 'Flexible'),
            ("5790", 'Flexible'),
            ("4800", 'Timeliness');
+
 
 --#####################
 --Insert values into Lab
@@ -569,20 +576,21 @@ INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-21
 
 --#####################
 --Insert values into Resident
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2012-09-12","4","5312","0123");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2013-03-20","6","7492","2384");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2015-11-12","12","5733","9433");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2016-06-25","10","8342","3948");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("2002-12-12","15","7219","2091");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`) VALUES ("2016-04-25","4","5312","0123", "2468");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`) VALUES ("2015-09-28","6","7492","2384", "2468");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`) VALUES ("2015-11-12","12","5733","9433", "2468");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`) VALUES ("2016-06-25","10","8342","3948", "1357");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`) VALUES ("2002-12-12","15","7219","2091", "1357");
 
 --#####################
 --Insert values into Nurse
-INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","2118", "West Wing");
-INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","5518", "East Wing");
-INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","6611", "East Wing");
-INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","3379", "East Wing");
-INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","5111", "West Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `centerID`) VALUES ("RN","2118", "1357");
+INSERT INTO `Nurse` (`certificate`,`personID`, `centerID`) VALUES ("RN","5518", "2468");
+INSERT INTO `Nurse` (`certificate`,`personID`, `centerID`) VALUES ("RN","6611", "2468");
+INSERT INTO `Nurse` (`certificate`,`personID`, `centerID`) VALUES ("General","3379", "2468");
+INSERT INTO `Nurse` (`certificate`,`personID`, `centerID`) VALUES ("General","5111", "1357");
 
+select * from Nurse;
 --Insert values into Staff
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Maintenance","3572");
@@ -599,6 +607,7 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 --Insert values into RN
 INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
 INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("5518","Harvard","2011-06-16");
+INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("6611","CSULB","2000-08-04");
 
 --######
 --Insert values into HeadNurse
@@ -607,13 +616,8 @@ INSERT INTO `HeadNurse`(`personID`, `assigned`) VALUES ("5518", 1);
 
 --#####################
 --Insert values into CareCenter
-INSERT INTO `CareCenter` (`location`,`name`) VALUES ("West Wing","Happy CareCenter");
-INSERT INTO `CareCenter` (`location`,`name`) VALUES ("East Wing","Sad CareCenter");
-
-ALTER TABLE Nurse
-    ADD CONSTRAINT nurseLoc_fk
-    FOREIGN KEY(location)
-    REFERENCES CareCenter(location);
+INSERT INTO `CareCenter` (`location`,`centerName`, `centerID`) VALUES ("West Wing","Happy CareCenter", "1357");
+INSERT INTO `CareCenter` (`location`,`centerName`, `centerID`) VALUES ("East Wing","Sad CareCenter", "2468");
 
 --#####################
 --Insert values into TimeCard
@@ -626,11 +630,13 @@ INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40"
 
 --#####################
 --Insert values into Bed
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("1","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("2","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("3","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("4","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("5","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("1","145","2468");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("2","145","2468");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("1","245","2468");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("2","245","1357");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("1","300","1357");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("1","200","1357");
+
 
 SELECT * FROM HospitalPerson;
 
@@ -641,14 +647,15 @@ DROP TABLE PersonPhone;
 DROP TABLE Employee;
 
 DROP TABLE Nurse;
-DROP TABLE RN;
 DROP TABLE Timecard;
 DROP TABLE CareCenter;
+DROP TABLE RN;
+DROP TABLE HeadNurse;
 -- have to drop the foreign key before being able to drop RN and Nurse
 ALTER TABLE Nurse
-    DROP FOREIGN KEY nurseLoc_fk;
+    DROP FOREIGN KEY nurseCenter_fk;
 ALTER TABLE Nurse
-    DROP location;
+    DROP centerID;
 
 
 DROP TABLE Volunteer;
