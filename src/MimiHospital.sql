@@ -132,18 +132,33 @@ CREATE TABLE RN(
     PRIMARY KEY(personID)
 );
 
-CREATE TABLE CareCenter(
-    location        VARCHAR(40) NOT NULL,
-    name            VARCHAR(40),
+CREATE TABLE HeadNurse(
     personID        INT NOT NULL,
+    assigned        BIT,
 
-    CONSTRAINT carecenter_fk
+    CONSTRAINT headNurse_fk
     FOREIGN KEY (personID)
     REFERENCES RN(personID),
 
-    CONSTRAINT carecenter_pk
-    PRIMARY KEY (location, personID)
+    CONSTRAINT headNurse_pk
+    PRIMARY KEY (personID)
 );
+
+CREATE TABLE CareCenter(
+    location        VARCHAR(40) NOT NULL,
+    name            VARCHAR(40),
+
+    CONSTRAINT carecenter_pk
+    PRIMARY KEY (location)
+);
+
+ALTER TABLE Nurse
+    ADD location    VARCHAR(40);
+
+ALTER TABLE Nurse
+    ADD CONSTRAINT nurseCenter_fk
+    FOREIGN KEY(location)
+    REFERENCES CareCenter(location);
 
 CREATE TABLE Technician(
     personID   INT NOT NULL,
@@ -258,13 +273,12 @@ CREATE TABLE Bed(
     bedNum          VARCHAR(20) NOT NULL,
     roomNum         VARCHAR(20) NOT NULL,
     location        VARCHAR(10) NOT NULL,
-    bedID           INT NOT NULL,
     CONSTRAINT bedCenter_fk
     FOREIGN KEY (location)
     REFERENCES CareCenter(location),
 
     CONSTRAINT bed_pk
-    PRIMARY KEY (bedNum, roomNum, location, bedID)
+    PRIMARY KEY (bedNum, roomNum, location)
 );
 
 
@@ -502,11 +516,11 @@ INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`) VALUES ("
 
 --#####################
 --Insert values into Nurse
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("RN","2118");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5518");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","6611");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","3379");
-INSERT INTO `Nurse` (`certificate`,`personID`) VALUES ("General","5111");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","2118", "West Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("RN","5518", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","6611", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","3379", "East Wing");
+INSERT INTO `Nurse` (`certificate`,`personID`, `location`) VALUES ("General","5111", "West Wing");
 
 --Insert values into Staff
 INSERT INTO `Staff` (`jobClass`,`personID`) VALUES ("Janitor","9626");
@@ -523,10 +537,17 @@ INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
 --#####################
 --Insert values into RN
 INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("2118","Stanford","2010-05-15");
+INSERT INTO `RN` (`personID`,`licenseLoc`,`dateReceived`) VALUES ("5518","Harvard","2011-06-16");
+
+--######
+--Insert values into HeadNurse
+INSERT INTO `HeadNurse`(`personID`, `assigned`) VALUES ("2118", 0);
+INSERT INTO `HeadNurse`(`personID`, `assigned`) VALUES ("5518", 1);
 
 --#####################
 --Insert values into CareCenter
-INSERT INTO `CareCenter` (`location`,`name`,`personID`) VALUES ("West Wing","Happy CareCenter","2118");
+INSERT INTO `CareCenter` (`location`,`name`) VALUES ("West Wing","Happy CareCenter");
+INSERT INTO `CareCenter` (`location`,`name`) VALUES ("East Wing","Sad CareCenter");
 
 ALTER TABLE Nurse
     ADD CONSTRAINT nurseLoc_fk
@@ -544,11 +565,11 @@ INSERT INTO `Timecard` (`date`,`hrsWorked`,`personID`) VALUES ("2016-04-29","40"
 
 --#####################
 --Insert values into Bed
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("1","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("2","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("3","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("4","145","West Wing");
-INSERT INTO `Bed` (`bedNum`,`roomNum`,`locaion`) VALUES ("5","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("1","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("2","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("3","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("4","145","West Wing");
+INSERT INTO `Bed` (`bedNum`,`roomNum`,`location`) VALUES ("5","145","West Wing");
 
 SELECT * FROM HospitalPerson;
 
