@@ -573,7 +573,9 @@ INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-14
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-12-25","Sad Christmas day for her.","8:00am-10:00am","857-458-2474");
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES (NULL,"Leg still fractured badly.","10:00am-11:00am","234-865-4564");
 INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-20","Hand still badly burned.","4:00pm-5:00pm","346-875-2745");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Fixed dislocated shoulder.","8:00am-11:00am","275-852-5485");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Fixed their face.","8:00am-11:00am","275-852-5485");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Assisted with hip therapy.","11:00am-1:00pm","275-852-5485");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Gave some medication for insomia.","3:00pm-5:00pm","275-852-5485");
 
 --#####################
 --Insert values into Resident
