@@ -541,6 +541,7 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1039",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920","6847","346-875-2745","2015-12-31");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","857-458-2474","2016-01-01");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1470","6401","857-458-2474","2016-01-01");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5893","4503","857-458-2474","2016-01-01");
 
 --#####################
 -- Insert values for technician

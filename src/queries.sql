@@ -13,7 +13,7 @@ SELECT firstName, lastName, personID FROM HospitalPerson NATURAL JOIN Volunteer 
 
 --3.) List all Patients who are also Volunteers at the Hospital. 
 
-SELECT personID, firstName, lastName FROM HospitalPerson NATURAL JOIN Patient NATURAL JOIN Volunteer;
+SELECT firstName, lastName FROM HospitalPerson INNER JOIN Volunteer ON HospitalPerson.personID = Volunteer.personID  INNER JOIN Patient ON Volunteer.personID = Patient.personID;
 
 --4.) Find each Outpatient who has been visited exactly once. 
 

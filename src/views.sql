@@ -9,9 +9,8 @@ SELECT firstName, lastName, hiredDate FROM HospitalPerson NATURAL JOIN Employee;
 
 --2. NursesInCharge: This view returns the name of the Nurse in Charge for each Care Center along with the phone number of the Nurse. 
 
---Not finished...
-SELECT firstName, lastName, phoneNum FROM HospitalPerson NATURAL JOIN PersonPhone 
-    NATURAL JOIN HeadNurse NATURAL JOIN CareCenter;
+SELECT firstName, lastName, phoneNum, centerName FROM HospitalPerson NATURAL JOIN Nurse NATURAL JOIN PersonPhone NATURAL JOIN HeadNurse
+NATURAL JOIN CareCenter WHERE assigned > 0;
 
 --3. GoodTechnician: This view returns all the Technicians how have at least one skill. 
 
