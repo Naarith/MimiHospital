@@ -206,24 +206,6 @@ CREATE TABLE CareCenter(
     CONSTRAINT carecenter_pk
     PRIMARY KEY (centerID)
 );
-CREATE TABLE Resident(
-    admittedDate	DATE,
-    lengthStayed	INT, -- can use check() to make sure lengthstayed is within a given range?
-    personID            INT NOT NULL,
-    ID                  INT NOT NULL,
-    centerID            VARCHAR(40) NOT NULL,
-
-    CONSTRAINT resident_fk
-    FOREIGN KEY(personID)
-    REFERENCES Patient(personID),
-    
-    CONSTRAINT residentcenter_fk
-    FOREIGN KEY(centerID)
-    REFERENCES CareCenter(centerID),
-
-    CONSTRAINT resident_pk
-    PRIMARY KEY (personID, ID)
-);
 CREATE TABLE Bed(
     bedNum          VARCHAR(20) NOT NULL,
     roomNum         VARCHAR(20) NOT NULL,
@@ -235,6 +217,34 @@ CREATE TABLE Bed(
     
     CONSTRAINT bed_pk
     PRIMARY KEY (bedNum, roomNum, centerID)
+);
+CREATE TABLE Resident(
+    admittedDate	DATE,
+    lengthStayed	INT, -- can use check() to make sure lengthstayed is within a given range?
+    personID            INT NOT NULL,
+    ID                  INT NOT NULL,
+    centerID            VARCHAR(40) NOT NULL,
+    bedNum              VARCHAR(20),
+    roomNum             VARCHAR(20),
+
+    CONSTRAINT resident_fk
+    FOREIGN KEY(personID)
+    REFERENCES Patient(personID),
+    
+    CONSTRAINT residentcenter_fk
+    FOREIGN KEY(centerID)
+    REFERENCES CareCenter(centerID),
+
+    CONSTRAINT residentbedroom_fk
+    FOREIGN KEY(bedNum, roomNum)
+    REFERENCES Bed(bedNum, roomNum),
+
+--     CONSTRAINT residentroom_fk
+--     FOREIGN KEY(roomNum)
+--     REFERENCES Bed(roomNum),
+
+    CONSTRAINT resident_pk
+    PRIMARY KEY (personID, ID)
 );
 
 
