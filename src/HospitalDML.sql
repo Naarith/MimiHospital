@@ -246,7 +246,7 @@ INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790",
 --####
 --INSERTING VALUES FOR Patient
 --####
-INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("0123","5312","345-346-3463","2016-04-29");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("0123","5312","275-852-5485","2016-04-29");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2384","7492","453-634-6363","2015-03-22");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("9433","5733","235-356-5474","2012-06-19");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("3948","8342","457-457-6558","2016-01-16");
