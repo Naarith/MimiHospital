@@ -5,23 +5,34 @@
 
 --1. Employees-Hired: This view returns the First Name, Last Name, and Date Hired of all Hospital Employees.
 
-SELECT firstName, lastName, hiredDate FROM HospitalPerson NATURAL JOIN Employee;
+CREATE VIEW EmployeesHired_View AS SELECT firstName, lastName, hiredDate FROM HospitalPerson NATURAL JOIN Employee;
 
 --2. NursesInCharge: This view returns the name of the Nurse in Charge for each Care Center along with the phone number of the Nurse. 
 
-SELECT firstName, lastName, phoneNum, centerName FROM HospitalPerson NATURAL JOIN Nurse NATURAL JOIN PersonPhone NATURAL JOIN HeadNurse
+CREATE VIEW NursesInCharge_View AS SELECT firstName, lastName, phoneNum, centerName FROM HospitalPerson NATURAL JOIN Nurse NATURAL JOIN PersonPhone NATURAL JOIN HeadNurse
 NATURAL JOIN CareCenter WHERE assigned > 0;
 
 --3. GoodTechnician: This view returns all the Technicians how have at least one skill. 
 
-SELECT personID, count(personID) AS "Skill Amount" FROM TechnicianSkill GROUP BY (personID) HAVING COUNT(personID)
+CREATE VIEW GoodTechnician_View AS SELECT personID, count(personID) AS "Skill Amount" FROM TechnicianSkill GROUP BY (personID) HAVING COUNT(personID)
 > 0;
 
 --4. CareCenter-Beds: This view returns the name for each Care Center along with the number of beds that are assigned to patients (occupied beds), the number of beds not assigned to patients (free beds), and the total number of beds. 
 
+CREATE VIEW CareCenterBeds_View AS select centerName, "Taken", COUNT(centerID) as "Beds Taken" from Resident natural join CareCenter group by centerName
+union
+select centerName, "Total", COUNT(location) as "Beds Total" FROM Bed natural join CareCenter group by centerName
+union
+select null, "Open", (select COUNT(centerID) from Bed) -
+(select COUNT(centerID) from Resident) from CareCenter;
 
 --5. OutPatientsNotVisited: This view returns all OutPatients who have not been visited by a Physician yet. 
 
+CREATE VIEW OutPatientsNotVisited_View AS select firstName, lastName, Outpatient.personID from Outpatient
+inner join Patient on Patient.personID = Outpatient.personID
+inner join Visit on Visit.personID = Outpatient.personID INNER JOIN HospitalPerson ON
+HospitalPerson.personID = Outpatient.personID
+WHERE Visit.date is NULL;
 
 --##########################################################
 --##########################################################
@@ -34,6 +45,9 @@ CREATE VIEW CareCenter_View AS SELECT * FROM CareCenter;
 
 --Employee
 CREATE VIEW Employee_View AS SELECT * FROM Employee;
+
+--HeadNurse
+CREATE VIEW HeadNurse_View AS SELECT * FROM HeadNurse;
 
 --HospitalPerson
 CREATE VIEW HospitalPerson_View AS SELECT * FROM HospitalPerson;
