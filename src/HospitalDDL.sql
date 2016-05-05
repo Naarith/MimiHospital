@@ -154,7 +154,7 @@ CREATE TABLE TechLab(
 
 
 CREATE TABLE Patient(
-    ID          INT NOT NULL,
+    ID          INT,
     personID    INT NOT NULL,
     pagerNum    VARCHAR(20),
     contactDate	DATE,
@@ -166,32 +166,32 @@ CREATE TABLE Patient(
     REFERENCES HospitalPerson(personID),
 
     CONSTRAINT patient_pk
-    PRIMARY KEY(ID, personID)
+    PRIMARY KEY(personID)
 );
 CREATE TABLE Outpatient(
     personID        INT NOT NULL,
-    ID              INT NOT NULL,
 
     CONSTRAINT outpatient_fk
     FOREIGN KEY (personID)
     REFERENCES Patient(personID),
 
-    CONSTRAINT outpatientPatient_fk
-    FOREIGN KEY(ID)
-    REFERENCES Patient(ID),
-
     CONSTRAINT outpatient_pk
-    PRIMARY KEY (personID, ID)
+    PRIMARY KEY (personID)
 );
 CREATE TABLE Visit(
     date        DATE,
     comment     VARCHAR(140),
     visitHrs    VARCHAR(40),
     pagerNum    VARCHAR(20) NOT NULL,
+    personID    INT,
 
     CONSTRAINT visit_fk
     FOREIGN KEY(pagerNum)
     REFERENCES Physician(pagerNum),
+
+    constraint visitout_fk
+    FOREIGN KEY(personID)
+    REFERENCES Outpatient(personID),
 
     CONSTRAINT visit_pk
     PRIMARY KEY (pagerNum, visitHrs)
@@ -222,7 +222,6 @@ CREATE TABLE Resident(
     admittedDate	DATE,
     lengthStayed	INT, -- can use check() to make sure lengthstayed is within a given range?
     personID            INT NOT NULL,
-    ID                  INT NOT NULL,
     centerID            VARCHAR(40) NOT NULL,
     bedNum              VARCHAR(20),
     roomNum             VARCHAR(20),
@@ -239,12 +238,8 @@ CREATE TABLE Resident(
     FOREIGN KEY(bedNum, roomNum)
     REFERENCES Bed(bedNum, roomNum),
 
---     CONSTRAINT residentroom_fk
---     FOREIGN KEY(roomNum)
---     REFERENCES Bed(roomNum),
-
     CONSTRAINT resident_pk
-    PRIMARY KEY (personID, ID)
+    PRIMARY KEY (personID)
 );
 
 

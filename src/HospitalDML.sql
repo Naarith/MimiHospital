@@ -240,7 +240,10 @@ INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
 --####
 --Insert values into TechLab ASSOCIATION TABLE
 --####
-INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("201","5790","2014-11-22");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("204","4800","2014-11-30");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("204","4092","2014-11-30");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("305","4800","2014-11-30");
 
 
 --####
@@ -252,7 +255,7 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("9433",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("3948","8342","457-457-6558","2016-01-16");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2091","7219","432-754-2765","2015-12-25");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("3485","9894","234-546-8468","2016-04-20");
-INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("6094","2607","234-865-4564","2016-04-01");
+INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("6094","2607","275-852-5485","2016-04-01");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1039","9723","275-852-5485","2015-10-01");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5920","6847","346-875-2745","2015-12-31");
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("2985","4272","857-458-2474","2016-01-01");
@@ -260,26 +263,26 @@ INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("1470",
 INSERT INTO `Patient` (`ID`,`personID`,`pagerNum`,`contactDate`) VALUES ("5893","4503","857-458-2474","2016-01-01");
 
 --####
---Insert Values into Visit
---####
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm",  "234-546-8468");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-02-14","Happy Valentines day!","6:00pm-8:00pm",            "453-634-6363");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-12-25","Sad Christmas day for her.","8:00am-10:00am",      "857-458-2474");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES (NULL,"Leg still fractured badly.","10:00am-11:00am",             "234-865-4564");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2016-04-20","Hand still badly burned.","4:00pm-5:00pm",         "346-875-2745");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Fixed dislocated shoulder.","8:00am-11:00am",      "275-852-5485");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Fixed their face.","2:00pm-3:00pm",                "275-852-5485");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Assisted with hip therapy.","11:00am-1:00pm",      "275-852-5485");
-INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`) VALUES ("2015-10-05","Gave some medication for insomia.","3:00pm-5:00pm","275-852-5485");
-
---####
 --Insert values into Outpatient
 --####
-INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9894","3485");
-INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("2607","6094");
-INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("9723","1039");
-INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("6847","5920");
-INSERT INTO `Outpatient` (`personID`,`ID`) VALUES ("4272","2985");
+INSERT INTO `Outpatient` (`personID`) VALUES ("9894");
+INSERT INTO `Outpatient` (`personID`) VALUES ("2607");
+INSERT INTO `Outpatient` (`personID`) VALUES ("9723");
+INSERT INTO `Outpatient` (`personID`) VALUES ("6847");
+INSERT INTO `Outpatient` (`personID`) VALUES ("4272");
+
+--####
+--Insert Values into Visit
+--####
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2016-04-29","He seems to be recovering well.","3:00pm-4:00pm",  "234-546-8468","2607");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2016-02-14","Happy Valentines day!","6:00pm-8:00pm",            "453-634-6363","4272");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2015-12-25","Sad Christmas day for her.","8:00am-10:00am",      "857-458-2474","9723");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES (NULL,"Leg still fractured badly.","10:00am-11:00am",             "234-865-4564","6847");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2016-04-20","Hand still badly burned.","4:00pm-5:00pm",         "346-875-2745","4272");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2015-10-05","Fixed dislocated shoulder.","8:00am-11:00am",      "275-852-5485","9723");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2015-10-05","Fixed their face.","2:00pm-3:00pm",                "275-852-5485","9723");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2015-10-05","Assisted with hip therapy.","11:00am-1:00pm",      "275-852-5485","9723");
+INSERT INTO `Visit` (`date`,`comment`,`visitHrs`,`pagerNum`,`personID`) VALUES ("2015-10-05","Gave some medication for insomia.","3:00pm-5:00pm","275-852-5485","9723");
 
 
 --####
@@ -330,8 +333,8 @@ INSERT INTO `Bed` (`bedNum`,`roomNum`,`centerID`) VALUES ("1","200","1357");
 --####
 --Insert values into Resident
 --####
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2016-04-25","4","5312","0123", "2468", "1", "145");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2015-09-28","6","7492","2384", "2468", "2", "145");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2015-11-12","12","5733","9433", "2468","1", "245");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2016-06-25","10","8342","3948", "1357", "2", "245");
-INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`ID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2002-12-12","15","7219","2091", "1357", "1", "300");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2016-04-25","4","5312", "2468", "1", "145");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2015-09-28","6","7492", "2468", "2", "145");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2015-11-12","12","5733", "2468","1", "245");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2016-06-25","10","8342", "1357", "2", "245");
+INSERT INTO `Resident` (`admittedDate`,`lengthStayed`,`personID`,`centerID`, `bedNum`, `roomNum`) VALUES ("2002-12-12","15","7219", "1357", "1", "300");
