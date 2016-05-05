@@ -21,12 +21,12 @@ SELECT firstName, lastName FROM HospitalPerson
     ON Volunteer.personID = Patient.personID;
 
 --4.) Find each Outpatient who has been visited exactly once. 
-SELECT firstName, lastName, date FROM HospitalPerson
-    NATURAL JOIN Patient
+SELECT firstName, lastName, date, personID FROM HospitalPerson
     NATURAL JOIN Outpatient
     NATURAL JOIN Visit
-    GROUP BY date
+    GROUP BY personID
     HAVING COUNT(date) = 1;
+
 
 --5.) For each Skill list the total number of volunteers and technicians that achieve this skill. 
 SELECT skillName, COUNT(TechnicianSkill.personID) AS 'SkillCount', 'Technician' AS 'People' FROM TechnicianSkill
