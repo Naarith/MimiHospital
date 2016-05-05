@@ -240,7 +240,10 @@ INSERT INTO `Lab` (`name`,`location`) VALUES ("Neurolab","305");
 --####
 --Insert values into TechLab ASSOCIATION TABLE
 --####
-INSERT INTO `TechLab` (`location`,`personID`, `startDate`) VALUES ("201","5790","2014-11-22");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("201","5790","2014-11-22");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("204","4800","2014-11-30");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("204","4092","2014-11-30");
+INSERT INTO `TechLab` (`location`,`personID`,`startDate`) VALUES ("305","4800","2014-11-30");
 
 
 --####
