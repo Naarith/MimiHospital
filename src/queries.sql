@@ -62,31 +62,52 @@ SELECT name, firstName, lastName, skillName FROM Lab
     NATURAL JOIN HospitalPerson;
 
 --10.) List all Resident patients that were admitted after the most current employee hire date.
-SELECT firstName, lastName, personID FROM HospitalPerson 
+SELECT firstName, lastName, personID, admittedDate FROM HospitalPerson 
     NATURAL JOIN Resident 
     WHERE admittedDate > (SELECT MAX(hiredDate) AS "Latest Hired Date" FROM Employee);
 
+--11.) Find all Patients who have been admitted within one week of their Contact Date.
+SELECT firstName, lastName, personID FROM Patient 
+    NATURAL JOIN Resident
+    NATURAL JOIN HospitalPerson
+    WHERE DATEDIFF(contactDate, admittedDate) < 7 AND
+    DATEDIFF(contactDate, admittedDate) > 0;
+
+--12. Find all Outpatients who have not been visited by a Physician within one week of their Contact Date.
+SELECT DISTINCT firstName, lastName, Outpatient.personID FROM Outpatient
+    NATURAL JOIN HospitalPerson
+    INNER JOIN Patient ON Patient.personID = Outpatient.personID
+    INNER JOIN Visit ON Visit.pagerNum = Patient.pagerNum
+    WHERE DATEDIFF(Patient.contactDate, Visit.date) > 7 OR
+    DATEDIFF(Patient.contactDate, Visit.date) < 0;
+    
+--13. List all Physicians who have made more than 3 visits on a single day.
+SELECT firstName, lastName, Physician.pagerNum, COUNT(Physician.pagerNum) AS 'Visits' FROM Physician
+    INNER JOIN Visit using (pagerNum)
+    INNER JOIN HospitalPerson on HospitalPerson.personID = Physician.personID
+    GROUP BY pagerNum
+    HAVING COUNT(pagerNum) > 3;
+
 --14.) List all Physicians that are responsible for more Outpatients than Resident Patients.
-select firstName, lastName, Physician.pagerNum, count(Physician.pagerNum) as 'PatientsResponsible' from HospitalPerson 
-    inner join Physician on HospitalPerson.personID = Physician.personID
-    inner join Patient on Patient.pagerNum = Physician.pagerNum 
-    inner join Outpatient on Patient.personID = Outpatient.personID
-    group by Physician.pagerNum;
-
-select firstName, lastName, Physician.pagerNum, count(Physician.pagerNum) as 'PatientsResponsible' from HospitalPerson 
-    natural join Physician
-    inner join Patient on Patient.pagerNum = Physician.pagerNum 
-    inner join Resident on Patient.personID = Resident.personID
-    group by Physician.pagerNum;
-
-select firstName, lastName, Physician.pagerNum from HospitalPerson inner join Physician
-    on HospitalPerson.personID = Physician.personID
-    inner join Patient on Patient.pagerNum = Physician.pagerNum
-    inner join Resident on Patient.personID = Resident.personID
-    union 
-   select Patient.pagerNum inner join Outpatient on Patient.personID = Outpatient.personID
-    --where (select count(Outpatient.personID) > count(Resident.personID))
-    group by Physician.pagerNum;
+-- CREATE VIEW PhysOut AS select firstName, lastName, Physician.pagerNum, count(Physician.pagerNum) as 'PatientsResponsible' from HospitalPerson 
+--     inner join Physician on HospitalPerson.personID = Physician.personID
+--     inner join Patient on Patient.pagerNum = Physician.pagerNum 
+--     inner join Outpatient on Patient.personID = Outpatient.personID
+--     group by Physician.pagerNum;
+-- 
+-- CREATE VIEW PhysIn AS select firstName, lastName, Physician.pagerNum, count(Physician.pagerNum) as 'PatientsResponsible' from HospitalPerson 
+--     natural join Physician
+--     inner join Patient on Patient.pagerNum = Physician.pagerNum 
+--     inner join Resident on Patient.personID = Resident.personID
+--     group by Physician.pagerNum;
+SELECT PhysOut.firstName AS 'FirstName', PhysOut.lastName AS 'LastName', 
+    PhysOut.pagerNum AS 'PagerNum', 
+    PhysOut.PatientsResponsible AS 'Outpatients', 
+    PhysIn.PatientsResponsible AS 'Residents' 
+    FROM PhysIn
+    INNER JOIN PhysOut 
+    on PhysIn.pagerNum = PhysOut.pagerNum
+    WHERE PhysOut.PatientsResponsible > PhysIn.PatientsResponsible;
 
 -- create view 
 -- answer for 14 is marshall dana
